@@ -93,7 +93,7 @@ contract ReceivePayment {
     // Transaction has to include value ether.
     // The ether will be locked until releasePayment is called.
     function confirmPurchase() public inState(State.Created) payable {
-        
+        Erc20(token).approve( address(this), amount);
         Erc20(token).transfer( address(this), amount);
         emit PurchaseConfirmed();
         buyer = payable(msg.sender);
